@@ -8,8 +8,8 @@ import xlwt
 
 wafer_thickness = 0.05
 angle_of_incidence = 6
-spectrum_start = 630
-spectrum_end = 440
+spectrum_start = 700
+spectrum_end = 350
 
 theta = angle_of_incidence*math.pi/180
 
@@ -38,7 +38,7 @@ def data_match(old_wavelength,old_data,new_wavelength):
                 new_data.append(old_data[i])
     return new_data
 
-refractive_index_path = 'C:/Users/fhan/Desktop/Absorption Coefficient Calculation/Standard sample\Refractive index.csv'
+refractive_index_path = 'C:/Users/fhan1/OneDrive/Desktop/Refractive index calculation/Initial refractive index\Initial refractive index.csv'
 with open(refractive_index_path, 'r') as csvfile:
     reader = csv.reader(csvfile)
     reader_rows = [row for row in reader]
@@ -55,7 +55,7 @@ original_refractive_index = [float(reader_rows[i][1]) for i in range(row_700,row
 
 workbook = xlwt.Workbook(encoding='utf-8')
 
-production_wafer_path = 'C:/Users/fhan/Desktop/Absorption Coefficient Calculation/Raw data/Production wafer measurement\*.csv'
+production_wafer_path = 'C:/Users/fhan1/OneDrive/Desktop/Refractive index calculation/Raw data\*.csv'
 for filename in glob.glob(production_wafer_path):
     wafer_ID = str.upper(filename.split('\\')[1][0:6])+'-'+filename.split('\\')[1][7:9]
     filename_for_saving = filename.split('\\')[1].split('.')[0]
@@ -91,7 +91,7 @@ for filename in glob.glob(production_wafer_path):
     plt.ylabel('refractive index')
     plt.legend()
     plt.grid()
-    plt.savefig('C:/Users/fhan/Desktop/Absorption Coefficient Calculation/Spectrum/'+filename_for_saving+', refractive index for S-polarized light.jpg')
+    plt.savefig('C:/Users/fhan1/OneDrive/Desktop/Refractive index calculation/'+filename_for_saving+', refractive index for S-polarized light.jpg')
     plt.show()
     
     for i in range(0,len(wavelength)):
@@ -125,14 +125,14 @@ for filename in glob.glob(production_wafer_path):
     plt.ylabel('refractive index')
     plt.legend()
     plt.grid()
-    plt.savefig('C:/Users/fhan/Desktop/Absorption Coefficient Calculation/Spectrum/'+filename_for_saving+', refractive index for P-polarized light.jpg')
+    plt.savefig('C:/Users/fhan1/OneDrive/Desktop/Refractive index calculation/'+filename_for_saving+', refractive index for P-polarized light.jpg')
     plt.show()
     
     for i in range(0,len(wavelength)):
         sheet1.write(sheet1_row,2,calculated_refractive_index[i])
         sheet1_row += 1
 
-workbook.save(r'C:/Users/fhan/Desktop/Absorption Coefficient Calculation/Summary\Calculated refractive index.xls')
+workbook.save(r'C:/Users/fhan1/OneDrive/Desktop/Refractive index calculation/Calculated refractive index.xls')
 
     
     
